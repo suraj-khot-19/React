@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // "use strict";
+        m = 30;//if not strict mode fine
+        // ReferenceError: m is not defined
+
+        console.log('hi this is how printing')
+        // this is comment
+
+        var a = 20;
+        var a = 40;
+        console.log('this is how variable declared', a);// this is how variable declared 40
+
+        const x = 10;
+        //x=10+20;  //!TypeError: Assignment to constant variable. //means we can not update it
+
+        let y = 10;
+        // let y=30; //Cannot redeclare block-scoped variable 'y'.
+
+        let z = {
+            r: 20,
+            a: 30,
+            b: 50,
+            c: function myfunction(k) {
+                console.log(k);
+            }
+        }
+        console.log(z);
+        /*
+            index.html:31 {r: 20, a: 30, b: 50, c: ƒ}
+
+            z.c(5)
+            5
+
+            z.a
+            30
+        */
+
+        function myFun(name) {
+            console.log('hi ', name);
+        }
+        /*
+            myFun()
+            hi  undefined
+        */
+
+        document.addEventListener('click', function click() {
+            console.log('this is printing when user click on h1');
+            //alert('this is alert');
+            /*
+                this is printing when user click on h1
+                [Violation] 'click' handler took 1784ms
+            */
+            let conf = confirm('are sure?');
+            console.log(conf);
+
+        });
+        /*
+            true/false
+            'click' handler took 2306ms
+        */
+
+        arr = [10, 20, 30];
+        console.log(arr);//[10, 20, 30]
+        arr.forEach(element => {
+            console.log(element);
+        });
+        /*
+            10
+            20
+            30
+        */
+
+        console.log(this);//Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+        function fun1() {
+            console.log(this);
+        }
+        fun1();//Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+        fun2 = (number) => {
+            console.log("the number is", +  this);
+        }
+        fun2();//the number is NaN
+
+        setTimeout(()=>{
+            console.log('I am callback function==> i will print after 3 milisecound');
+        },3000);
+        console.log('i am below of call back function');
+        /*
+            i am below of call back function
+            I am callback function==> i will print after 3 milisecound
+        */    
+</script>
+</head>
+
+<body>
+    <h1>Hi I am learning javascript</h1>
+</body>
+
+</html>
