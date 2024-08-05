@@ -19,15 +19,22 @@ export default function TextForm(prop) {
         setText(event.target.value);
     };
     // Returns a stateful value, and a function to update it.
-    const [text, setText] = useState("Enter Text Here");
+    const [text, setText] = useState("");
     return (
-        <div>
+        <>
+        <div className='container py-2'>
             <div className="mb-3">
                 <textarea className="form-control" id="exampleFormControlTextarea1" value={text} onChange={handelOnChange} rows="8"></textarea>
             </div>
-            <button type="button" className="btn btn-primary" onClick={onClickUpper}>UpperCase</button>
-            <button type="button" className="btn btn-primary" onClick={onClickLower}>LowerCase</button>
-
+            <button type="button" className="btn btn-primary mx-2" onClick={onClickUpper}>UpperCase</button>
+            <button type="button" className="btn btn-primary mx-2" onClick={onClickLower}>LowerCase</button>
         </div>
+        <div className="container">
+            <h3>Summery</h3>
+            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <h3>preview</h3>
+            <p>{text.length===0?"please enter text":text}</p>
+        </div>
+        </>
     )
 }
