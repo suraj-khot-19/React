@@ -36,10 +36,10 @@ Navbar.propTypes =
     home: PropTypes.string.isRequired,
     about: PropTypes.string.isRequired,
 }
-
+//!no longer used in new version
 //setting default propes which will pint when we forgot to pass props
-Navbar.defaultProps = {
-    title: "TextUtils",
-    home: "Home",
-    about: "About"
-}
+// Navbar.defaultProps = {
+//     title: "TextUtils",
+//     home: "Home",
+//     about: "About"
+// }
