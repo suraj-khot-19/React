@@ -10,6 +10,9 @@ export default function TextForm(prop) {
         let newText = text.toLowerCase();
         setText(newText);
     }
+    function onClickClear() {
+        setText('');
+    }
     //in text area always gives us a event
     function handelOnChange(event) {
         // setText="hello"; incorrect way to handel state
@@ -28,10 +31,11 @@ export default function TextForm(prop) {
             </div>
             <button type="button" className="btn btn-primary mx-2" onClick={onClickUpper}>UpperCase</button>
             <button type="button" className="btn btn-primary mx-2" onClick={onClickLower}>LowerCase</button>
+            <button type="button" className="btn btn-primary mx-2" onClick={onClickClear}>Clear</button>
         </div>
         <div className="container">
             <h3>Summery</h3>
-            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{text.split(" ").length-1} words and {text.length} characters</p>
             <h3>preview</h3>
             <p>{text.length===0?"please enter text":text}</p>
         </div>
