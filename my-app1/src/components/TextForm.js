@@ -45,21 +45,24 @@ export default function TextForm(prop) {
     }
     return (
         <>
-            <div className='container py-2'>
-                <div className="mb-3">
-                    <textarea className="form-control" id="exampleTextarea1" value={text} onChange={handelOnChange} rows="8"></textarea>
-                </div>
-                <button type="button" className="btn btn-primary mx-2" onClick={onClickUpper}>UpperCase</button>
-                <button type="button" className="btn btn-primary mx-2" onClick={onClickLower}>LowerCase</button>
-                <button type="button" className="btn btn-primary mx-2" onClick={onClickClear}>Clear</button>
-                <button type="button" className="btn btn-primary mx-2" onClick={onClickCopy}>{copy} Text</button>
-                <button type="button" className="btn btn-primary mx-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
-            </div>
             <div className="container">
-                <h3>Summery</h3>
-                <p>{text.split(" ").length - 1} words and {text.length} characters</p>
-                <h3>preview</h3>
-                <p>{text.length === 0 ? "please enter text" : text}</p>
+                <h3>Enter Text Below</h3>
+                <div>
+                    <div className="mb-3">
+                        <textarea className="form-control" id="exampleTextarea1" style={{ color: prop.theme === 'light' ? 'black' : 'white', backgroundColor: prop.theme === 'dark' ? 'grey' : 'white' }} value={text} onChange={handelOnChange} rows="8"></textarea>
+                    </div>
+                    <button type="button" className="btn btn-primary mx-2" onClick={onClickUpper}>UpperCase</button>
+                    <button type="button" className="btn btn-primary mx-2" onClick={onClickLower}>LowerCase</button>
+                    <button type="button" className="btn btn-primary mx-2" onClick={onClickClear}>Clear</button>
+                    <button type="button" className="btn btn-primary mx-2" onClick={onClickCopy}>{copy} Text</button>
+                    <button type="button" className="btn btn-primary mx-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
+                </div>
+                <div className="container">
+                    <h3>Summery</h3>
+                    <p>{text.split(" ").length - 1} words and {text.length} characters</p>
+                    <h3>preview</h3>
+                    <p>{text.length === 0 ? "Please Enter Text To Preview" : text}</p>
+                </div>
             </div>
         </>
     )

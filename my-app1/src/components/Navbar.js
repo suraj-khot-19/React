@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'; //impt
 //rfc ==> react function based component 
 export default function Navbar(prop) {
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+        <nav className={`navbar navbar-expand-lg bg-body-tertiary bg-${prop.theme === 'light' ? 'dark' : 'light'}`} data-bs-theme={prop.theme}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">{prop.title}</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +20,15 @@ export default function Navbar(prop) {
                         </li>
 
                     </ul>
-                    <form className="d-flex" role="search">
+                    {/* <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-primary" type="submit">Search</button>
-                    </form>
+                    </form> */}
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" onClick={prop.mode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                        <label className={`form-check-label text-${prop.theme === 'light' ? 'dark' : 'light'}`} htmlFor="flexSwitchCheckDefault" >{prop.theme === 'light' ? 'Enable DarkMode' :'Enable LightMode'}</label>
+                    </div>
+
                 </div>
             </div>
         </nav>
