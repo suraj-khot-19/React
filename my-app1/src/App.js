@@ -11,7 +11,7 @@ function App() {
   function mode() {
     if (theme === 'light') {
       setTheme('dark');
-      //universal setting
+      //universal setting onw set for all
       document.body.style.backgroundColor = '#041630'
       document.body.style.color = 'white'
     }
