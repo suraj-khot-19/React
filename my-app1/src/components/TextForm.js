@@ -17,15 +17,18 @@ export default function TextForm(prop) {
     function onClickUpper() {
         let newText = text.toUpperCase();
         setText(newText);
+        prop.showAlert("Text Converted to Uppercase", "success");
     }
     //lower case
     function onClickLower() {
         let newText = text.toLowerCase();
         setText(newText);
+        prop.showAlert("Text Converted to Lowercase", "success");
     }
     //clear text
     function onClickClear() {
         setText('');
+        prop.showAlert("Text Is cleared", "danger");
     }
     //copy text
     const [copy, setCopy] = useState("Copy");
@@ -34,6 +37,8 @@ export default function TextForm(prop) {
         // newText.select();
         copy === 'Copy' ? setCopy("Copied") : setCopy("Copy");
         navigator.clipboard.writeText(newText.value);
+
+        prop.showAlert("Text Copied to clipboard", "success");
     }
     //remove extra space
     function onClickRemoveExtraSpace() {
@@ -42,6 +47,8 @@ export default function TextForm(prop) {
         let newText = text.split(/[  ]+/);
         //dds all the elements of an array into a string, separated by the specified separator string.
         setText(newText.join(" "));
+
+        prop.showAlert("Extra spaces are removed", "success");
     }
     return (
         <>
