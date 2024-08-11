@@ -67,7 +67,8 @@ export default function TextForm(prop) {
                 </div>
                 <div className="container">
                     <h3>Summery</h3>
-                    <p>{text.split(" ").filter((eachElement) => { return eachElement.length !== 0 }).length} words and {text.trim().length} characters</p>
+                    {/* filtering means returning array of element which contain least one char  */}
+                    <p>{text.split(/\s+/).filter((eachElement) => { return eachElement.length !== 0 }).length} words and {text.trim().length} characters</p>
                     <h3>preview</h3>
                     <p>{text.length === 0 ? "Nothing To Preview!" : text}</p>
                 </div>
