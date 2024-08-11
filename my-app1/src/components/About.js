@@ -1,33 +1,41 @@
-import React, { useState } from "react"
+import React from "react"
+// import React, { useState } from "react"
 
 
-export default function About() {
-    const [btnText, setBtnText] = useState("Enable Dark Mode");
-    const [myStyle, setMyStyling] = useState({
+export default function About(props) {
+    // const [btnText, setBtnText] = useState("Enable Dark Mode");
+    // const [myStyle, setMyStyling] = useState({
 
-        color: 'black',
-        backgroundColor: 'white',
-    });
-    function toggleTheme() {
-        if (myStyle.color === 'black') {
-            setMyStyling(
-                {
-                    color: 'white',
-                    backgroundColor: 'black',
-                }
-            );
-            setBtnText('Enable light Mode');
-        }
-        else {
-            setMyStyling({
-                color: 'black',
-                backgroundColor: 'white',
-            });
-            setBtnText('Enable dark Mode');
-        }
+    //     color: 'black',
+    //     backgroundColor: 'white',
+    // });
+    // function toggleTheme() {
+    //     if (myStyle.color === 'black') {
+    //         setMyStyling(
+    //             {
+    //                 color: 'white',
+    //                 backgroundColor: 'black',
+    //             }
+    //         );
+    //         setBtnText('Enable light Mode');
+    //     }
+    //     else {
+    //         setMyStyling({
+    //             color: 'black',
+    //             backgroundColor: 'white',
+    //         });
+    //         setBtnText('Enable dark Mode');
+    //     }
+    // }
+    const myStyle = {
+        border: 'solid 2px',
+        borderColor: props.theme === "light" ? "black" : "grey"
     }
     return (
-        <div style={myStyle}>
+        <div>
+            <div style={{ textAlign: "center", fontSize: '35px' }}>
+                About Us
+            </div>
             <div className="accordion" id="accordionExample" style={myStyle}>
                 <div className="accordion-item">
                     <h2 className="accordion-header">
@@ -66,7 +74,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
-            <button type="button" onClick={toggleTheme} className="btn btn-primary my-3">{btnText}</button>
+            {/* <button type="button" onClick={toggleTheme} className="btn btn-primary my-3">{btnText}</button> */}
         </div>
     )
 }

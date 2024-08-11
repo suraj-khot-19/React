@@ -64,11 +64,11 @@ function App() {
         {/* routes */}
         <Routes>
           <Route path='/' element={<TextForm theme={theme} showAlert={showAlert} />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/about' element={<About mode={mode} theme={theme}  />} />
         </Routes>
       </Router>
     </>
   );
 }
-
 export default App;
+

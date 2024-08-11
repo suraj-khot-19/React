@@ -50,6 +50,7 @@ export default function TextForm(prop) {
 
         prop.showAlert("Extra spaces are removed", "success");
     }
+
     return (
         <>
             <div className="container">
@@ -58,17 +59,17 @@ export default function TextForm(prop) {
                     <div className="mb-3">
                         <textarea className="form-control" id="exampleTextarea1" style={{ color: prop.theme === 'light' ? 'black' : 'white', backgroundColor: prop.theme === 'dark' ? 'grey' : 'white' }} value={text} onChange={handelOnChange} rows="8"></textarea>
                     </div>
-                    <button type="button" className="btn btn-primary mx-2" onClick={onClickUpper}>UpperCase</button>
-                    <button type="button" className="btn btn-primary mx-2" onClick={onClickLower}>LowerCase</button>
-                    <button type="button" className="btn btn-primary mx-2" onClick={onClickClear}>Clear</button>
-                    <button type="button" className="btn btn-primary mx-2" onClick={onClickCopy}>{copy} Text</button>
-                    <button type="button" className="btn btn-primary mx-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickLower}>LowerCase</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickClear}>Clear</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickCopy}>{copy} Text</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickUpper}>UpperCase</button>
                 </div>
                 <div className="container">
                     <h3>Summery</h3>
-                    <p>{text.split(" ").length - 1} words and {text.length} characters</p>
+                    <p>{text.split(" ").filter((eachElement) => { return eachElement.length !== 0 }).length} words and {text.trim().length} characters</p>
                     <h3>preview</h3>
-                    <p>{text.length === 0 ? "Please Enter Text To Preview" : text}</p>
+                    <p>{text.length === 0 ? "Nothing To Preview!" : text}</p>
                 </div>
             </div>
         </>
