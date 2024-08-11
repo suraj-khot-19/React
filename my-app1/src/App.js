@@ -4,6 +4,8 @@ import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, { useState } from 'react'//imrs
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 function App() {
   //set light initialy
   const [theme, setTheme] = useState('light');
@@ -17,6 +19,15 @@ function App() {
       document.body.style.color = 'white'
       //alert
       showAlert("Dark mode is enabled", "success");
+      //changing title
+      document.title = "TextUtils-Dark";
+      // changing titile in itervals
+      // setInterval(() => {
+      //   document.title = "TextUtils-Amazing";
+      // }, 1500);
+      // setInterval(() => {
+      //   document.title = "TextUtils-download";
+      // }, 2000);
     }
     else {
       setTheme('light');
@@ -25,6 +36,8 @@ function App() {
       document.body.style.color = 'black'
       //alert
       showAlert("Light mode is enabled", "success");
+      //changing title
+      document.title = "TextUtils-Light";
     }
   }
 
@@ -44,10 +57,16 @@ function App() {
   }
   return (
     <>
-      <Navbar title='TextUtils' home="Home" about="About" theme={theme} mode={mode} />
-      <Alert alert={alert} />
-      <TextForm theme={theme} showAlert={showAlert} />
-      {/* <About /> */}
+      <Router>
+        {/* content in every page  */}
+        <Navbar title='TextUtils' home="Home" about="About" theme={theme} mode={mode} />
+        <Alert alert={alert} />
+        {/* routes */}
+        <Routes>
+          <Route path='/' element={<TextForm theme={theme} showAlert={showAlert} />} />
+          <Route path='/about' element={<About />} />
+        </Routes>
+      </Router>
     </>
   );
 }
