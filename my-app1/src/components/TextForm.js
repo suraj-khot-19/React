@@ -51,6 +51,10 @@ export default function TextForm(prop) {
         prop.showAlert("Extra spaces are removed", "success");
     }
 
+    //search a text
+    function onClickSearch(){
+
+    }
     return (
         <>
             <div className="container">
@@ -64,6 +68,7 @@ export default function TextForm(prop) {
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickCopy}>{copy} Text</button>
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickUpper}>UpperCase</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickSearch}>search text</button>
                 </div>
                 <div className="container">
                     <h3>Summery</h3>

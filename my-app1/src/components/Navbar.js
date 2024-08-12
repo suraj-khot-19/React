@@ -21,6 +21,7 @@ export default function Navbar(prop) {
                         </li>
 
                     </ul>
+                    {/*
                     <div className="d-flex" >
                         <div className="bg-primary rounded mx-2" onClick={() => { prop.mode('primary') }} style={{ height: '25px', width: '25px', cursor: 'pointer' }}></div>
                         <div className="bg-secondary rounded mx-2" onClick={() => { prop.mode('secondary') }} style={{ height: '25px', width: '25px', cursor: 'pointer' }}></div>
@@ -29,7 +30,7 @@ export default function Navbar(prop) {
                         <div className="bg-danger rounded mx-2" onClick={() => { prop.mode('danger') }} style={{ height: '25px', width: '25px', cursor: 'pointer' }}></div>
                         <div className="bg-warning rounded mx-2" onClick={() => { prop.mode('warning') }} style={{ height: '25px', width: '25px', cursor: 'pointer' }}></div>
                     </div>
-
+                    */}
                     {/* <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-primary" type="submit">Search</button>

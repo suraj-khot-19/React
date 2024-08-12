@@ -11,7 +11,7 @@ function App() {
   const [theme, setTheme] = useState('light');
 
   //fun to toogle theme
-  /*
+
   function mode() {
     if (theme === 'light') {
       setTheme('dark');
@@ -41,22 +41,23 @@ function App() {
       document.title = "TextUtils-Light";
     }
   }
-    */
 
-  function removeBgClass() {
-    document.body.classList.remove('bg-primary');
-    document.body.classList.remove('bg-secondary');
-    document.body.classList.remove('bg-success');
-    document.body.classList.remove('bg-info');
-    document.body.classList.remove('bg-danger');
-    document.body.classList.remove('bg-warning');
-  }
-  function mode(cls) {
-    removeBgClass();
-    let temp = `bg-${cls}`;
-    document.body.classList.add(temp);
-  }
 
+  /*
+   function removeBgClass() {
+     document.body.classList.remove('bg-primary');
+     document.body.classList.remove('bg-secondary');
+     document.body.classList.remove('bg-success');
+     document.body.classList.remove('bg-info');
+     document.body.classList.remove('bg-danger');
+     document.body.classList.remove('bg-warning');
+   }
+   function mode(cls) {
+     removeBgClass();
+     let temp = `bg-${cls}`;
+     document.body.classList.add(temp);
+   }
+ */
 
   //alert initialy null
   const [alert, setalert] = useState(null);
