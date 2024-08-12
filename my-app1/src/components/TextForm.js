@@ -35,6 +35,7 @@ export default function TextForm(prop) {
     function onClickCopy() {
         let newText = document.getElementById('exampleTextarea1');
         // newText.select();
+
         copy === 'Copy' ? setCopy("Copied") : setCopy("Copy");
         navigator.clipboard.writeText(newText.value);
 
@@ -52,8 +53,19 @@ export default function TextForm(prop) {
     }
 
     //search a text
-    function onClickSearch(){
-
+    const [isSearch, setIsSearch] = useState(false);
+    const [searchText, setSearchText] = useState("");
+    function changeState(){
+        setIsSearch(true);
+    }
+    const onClickStartSearch = () => {
+        const parts = text.split(new RegExp(`(${searchText})`, 'gi'));
+        parts.map((part, index) =>
+            part.toLowerCase() === searchText.toLowerCase() ? prop.showAlert("Search found", "success") : prop.showAlert("Search Not Found", "danger")
+        );
+    }
+    function onChangeSearch(event) {
+        setSearchText(event.target.value);
     }
     return (
         <>
@@ -68,9 +80,20 @@ export default function TextForm(prop) {
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickCopy}>{copy} Text</button>
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickRemoveExtraSpace}>Remove Extra Space</button>
                     <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickUpper}>UpperCase</button>
-                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickSearch}>search text</button>
+                    <button disabled={text.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={changeState}>search text</button>
+
+                    {isSearch && text.length !== 0
+                        ? <input type='text' name='search' id='exampleSearch' placeholder={"enter text to search"} value={searchText} onChange={onChangeSearch} />
+                        : <div />
+                    } 
+                    {isSearch && text.length !== 0
+                        ? <button disabled={searchText.length === 0} type="button" className="btn btn-primary mx-2 my-2" onClick={onClickStartSearch}>search</button>
+                        : <div />
+                    }
+
                 </div>
-                <div className="container">
+
+                <div className="container ">
                     <h3>Summery</h3>
                     {/* filtering means returning array of element which contain least one char  */}
                     <p>{text.split(/\s+/).filter((eachElement) => { return eachElement.length !== 0 }).length} words and {text.trim().length} characters</p>
