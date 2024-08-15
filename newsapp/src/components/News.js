@@ -7,7 +7,6 @@ export default class News extends Component {
         country: 'in',
         category: 'general',
         pageSize: 20,
-
     }
     static propTypes = {
         country: PropTypes.string,
@@ -28,10 +27,10 @@ export default class News extends Component {
         this.handleNext = this.handleNext.bind(this);
     }
 
-    //Called immediately after a component is mounted. Setting state here will trigger re-rendering.
-    async componentDidMount() {
+    //creating all in fun
+    async allInOneNewsFun() {
         this.setState({ isLoading: true });
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1feeb3ba971c425182492eef91ff97ce&page=1&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1feeb3ba971c425182492eef91ff97ce&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
         let rawData = await data.json();
         //added total results and articles
@@ -41,31 +40,19 @@ export default class News extends Component {
             isLoading: false
         });
     }
+    //Called immediately after a component is mounted. Setting state here will trigger re-rendering.
+    async componentDidMount() {
+        this.allInOneNewsFun();
+    }
     //previous
     async handlePrev() {
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1feeb3ba971c425182492eef91ff97ce&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-        this.setState({ isLoading: true });
-        let data = await fetch(url);
-        let rawData = await data.json();
-        this.setState({
-            articles: rawData.articles,
-            page: this.state.page - 1,
-            isLoading: false
-        });
+        this.allInOneNewsFun();
+        this.setState({ page: this.state.page - 1 });
     }
     //next
     async handleNext() {
-        //if next page(page+1) is less than totalResults/pagesize
-        if (!(this.state.page + 1 > Math.ceil(this.state.totalResult / this.props.pageSize))) {
-            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1feeb3ba971c425182492eef91ff97ce&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-            this.setState({ isLoading: true });
-            let data = await fetch(url);
-            let rawData = await data.json();
-            this.setState({
-                articles: rawData.articles,
-                page: this.state.page + 1, isLoading: false
-            });
-        }
+        this.allInOneNewsFun();
+        this.setState({ page: this.state.page + 1 });
     }
     render() {
         return (
@@ -86,7 +73,7 @@ export default class News extends Component {
                                 //Warning: Each child in a list should have a unique "key" prop.
                                 <div className="col-md-4" key={e.url}>
                                     {/* if any null then show empty string */}
-                                    <NewsItem title={e.title ? e.title : ""} discription={e.description ? e.description : ""} imageUrl={e.urlToImage} url={e.url} author={e.author} time={e.publishedAt} source={e.source.name} />
+                                    <NewsItem title={e.title ? e.title : ""} discription={e.description ? e.description : ""} imageUrl={e.urlToImage} url={e.url} author={e.author} time={e.publishedAt} source={e.source.name} theme={this.props.theme}/>
                                 </div>
                             )}
                         </div>
