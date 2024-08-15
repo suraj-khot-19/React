@@ -86,7 +86,7 @@ export default class News extends Component {
                                 //Warning: Each child in a list should have a unique "key" prop.
                                 <div className="col-md-4" key={e.url}>
                                     {/* if any null then show empty string */}
-                                    <NewsItem title={e.title ? e.title : ""} discription={e.description ? e.description : ""} imageUrl={e.urlToImage} url={e.url} />
+                                    <NewsItem title={e.title ? e.title : ""} discription={e.description ? e.description : ""} imageUrl={e.urlToImage} url={e.url} author={e.author} time={e.publishedAt} source={e.source.name} />
                                 </div>
                             )}
                         </div>
