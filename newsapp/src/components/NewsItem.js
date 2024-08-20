@@ -10,9 +10,11 @@ export default class NewsItem extends Component {
                     {/* if image is empty then show this image */}
                     <img src={!imageUrl ? "https://tse1.mm.bing.net/th?id=OIP.vouIGuArVyo31eH-_MFxnQHaEK&pid=Api&P=0&h=180" : imageUrl} className="card-img-top" alt="..." />
                     <div className="card-body">
-                        <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{ left: "90%", zIndex: 1 }}>
-                            {source}
-                        </span>
+                        <div style={{ right: "0", top: '0', position: 'absolute', display: 'flex' }}>
+                            <span className="badge rounded-pill bg-danger">
+                                {source}
+                            </span>
+                        </div>
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{discription}</p>
                         <p className="card-text "><small className={`text-${theme === 'light' ? 'blue' : 'grey'}`}>By {author} at {new Date(time).toGMTString()}</small></p>

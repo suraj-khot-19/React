@@ -34,16 +34,20 @@ export default class News extends Component {
     //creating all in fun
     async allInOneNewsFun() {
         // this.setState({ isLoading: true });
+        this.props.setProgress(10);
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1feeb3ba971c425182492eef91ff97ce&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
+        this.props.setProgress(30);
         let rawData = await data.json();
+        this.props.setProgress(50);
         //added total results and articles
         this.setState({
             articles: rawData.articles,
             totalResult: rawData.totalResults || 0,
             isLoading: false
         });
-        document.title=`NewsMonkey- ${this.props.category}`;
+        document.title = `NewsMonkey- ${this.props.category}`;
+        this.props.setProgress(100);
     }
 
     //Called immediately after a component is mounted. Setting state here will trigger re-rendering.
@@ -97,7 +101,7 @@ export default class News extends Component {
                             dataLength={this.state.articles.length}
                             next={this.fetchMoreData}
                             hasMore={this.state.articles.length <= this.state.totalResult}
-                            loader={<Loader />}
+                            loader={<div className='text-center'><Loader /></div>}
                             endMessage={
                                 <p style={{ textAlign: "center" }}>
                                     <b>Yay! You have seen it all</b>
