@@ -5,9 +5,11 @@ const app = express();
 const port = 3000;
 
 connectToMongoose();
-app.get('/', () => {
-    console.log("hello");
-})
+
+// routers
+app.use('/api/auth',require('./routers/auth'));
+app.use('/api/notes',require('./routers/notes'));
+
 app.listen(port, () => {
     console.log(`app is listning at port http://localhost:${port}`)
 });
