@@ -4,6 +4,7 @@ const User = require('../models/User');
 const { validationResult, body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const getUserData = require('../middleware/getuser');
 const JWT_SecureStr = "ILovePrograming";
 
 //! register user
@@ -41,9 +42,9 @@ router.post(
                 password: securePassword,
                 email: req.body.email
             });
-            // sending jwt token
+            // sending jwt token=user id+secure code
             let uid = {
-                id: user.id,
+                id: user.id
             }
             var authToken = jwt.sign(uid, JWT_SecureStr);
             res.send({ authToken });
@@ -86,7 +87,7 @@ router.post(
                 return res.status(400).json({ error: "please enter correct credintials!" });
             }
 
-            // else sending jwt token
+            // else sending jwt token=user id+secure code
             let uid = {
                 id: user.id,
             }
@@ -97,5 +98,18 @@ router.post(
         }
 
     });
+
+// !get user data
+router.post('/getuser', getUserData, async (req, res) => {
+    try {
+        // getting user id from middleware
+        let uid = req.userId;
+        // find the user by its id and send data except password
+        let data = await User.findById(uid).select('-password');
+        res.send(data);
+    } catch (error) {
+        res.status(500).send("Some error is occured!");
+    }
+});
 
 module.exports = router;
