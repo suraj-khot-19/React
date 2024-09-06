@@ -97,4 +97,39 @@ router.put(
         }
     });
 
+
+// !    delete note
+router.delete(
+    // url
+    '/delete/:id',
+    // middleware
+    getUserData,
+    // fn
+    async (req, res) => {
+        // getting uid from middleware
+        const uid = req.userId;
+
+        try {
+            // find note by its id
+            let note = await Notes.findById(req.params.id);
+
+            // if note not found
+            if (!note) {
+                return res.status(404).send({ error: "Note not found" });
+            }
+
+            // if user in note is not equal to requested user
+            if (note.user.toString() != uid) {
+                return res.status(401).send({ error: "not valid user" });
+            }
+
+            // delete note
+            note = await Notes.findByIdAndDelete(req.params.id);
+            res.send({ "sucess": "note deleted" })
+        }
+        catch (error) {
+            return res.status(500).send({ error: "Internal server error" });
+        }
+    });
+
 module.exports = router;
