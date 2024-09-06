@@ -16,13 +16,18 @@ router.get('/getnote', getUserData, async (req, res) => {
     }
 });
 
-//! create note
-router.post('/createnote', getUserData,
+//!     create note
+router.post(
+    // url
+    '/createnote',
+    // middleware
+    getUserData,
     // validating body's parameters
     [
         body('title', 'title at least 2 char').isLength({ min: 2 }),
         body('desciption', 'description at least 5 char').isLength({ min: 5 }),
     ],
+    // fn
     async (req, res) => {
         // Extracts the validation errors of an express request
         const errors = validationResult(req);
@@ -43,9 +48,52 @@ router.post('/createnote', getUserData,
                 user: uid,
             });
             const saved = await note.save();
-            res.send({ saved })
+            res.send({ note: saved })
         } catch (error) {
             return res.status(500).send({ error: error.message });
+        }
+    });
+
+// !    update note
+router.put(
+    // url
+    '/update/:id',
+    // middleware
+    getUserData,
+    // fn
+    async (req, res) => {
+        // getting uid from middleware
+        const uid = req.userId;
+
+        // destucture body
+        const { title, desciption, tag } = req.body;
+
+        try {
+            // new note
+            let newNote = {};
+            if (title) { newNote.title = title; }
+            if (desciption) { newNote.desciption = desciption; }
+            if (tag) { newNote.tag = tag; }
+
+            // find note by its id
+            let note = await Notes.findById(req.params.id);
+
+            // if note not found
+            if (!note) {
+                return res.status(404).send({ error: "Note not found" });
+            }
+
+            // if user in note is not equal to requested user
+            if (note.user.toString() != uid) {
+                return res.status(401).send({ error: "not valid user" });
+            }
+
+            // update note
+            note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+            res.send(newNote);
+        }
+        catch (error) {
+            return res.status(500).send({ error: "Internal server error" });
         }
     });
 
