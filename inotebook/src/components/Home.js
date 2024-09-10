@@ -1,20 +1,33 @@
-import React, { useContext, useEffect } from 'react';
-import NoteContext from '../context/note/NoteContext';
+import React from 'react'
+import Notes from './Notes';
 
 export default function Home() {
-    // Accepts a context object (the value returned from React.createContext) and returns the current context value, as given by the nearest context provider for the given context.
-    const context = useContext(NoteContext);
-
-    // check for update if updates reload it
-    useEffect(() => {
-        // calling update fun from notestate
-        context.update();
-        // eslint-disable-next-line 
-    }, []);
-
     return (
-        <div>
-            <p>hi {context.state.name} {context.state.sirname}</p>
-        </div>
+        <>
+            <div className="container my-4">
+                <div className="container">
+                    <h2>Create a Note</h2>
+                    <div className='container'>
+                        {/* form */}
+                        <form>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputEmail1" className="form-label">Note title</label>
+                                <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="titleHelp" />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputPassword1" className="form-label">description</label>
+                                <input type="text" className="form-control" id="exampleInputPassword1" />
+                            </div>
+                            <button type="submit" className="btn btn-primary my-3 mx-4">Add</button>
+                        </form>
+                    </div>
+                </div>
+                {/* all notes */}
+                <div className="container my-3">
+                    <h2>Your Notes</h2>
+                    <Notes />
+                </div>
+            </div>
+        </>
     )
 }
