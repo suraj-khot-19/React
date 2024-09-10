@@ -6,13 +6,12 @@ function Notes() {
     // Accepts a context object (the value returned from React.createContext) and returns the current context value, as given by the nearest context provider for the given context.
     const context = useContext(NoteContext);
     // desrtucturing the context
-    // eslint-disable-next-line 
-    const { state, setstate } = context;
+    const { note } = context;
     return (
         <>
             <div className="row">
-                {state.map((note) => {
-                    return <NotesItems key={note._id} title={note.title} desciption={note.desciption} />
+                {note.map((e) => {
+                    return <NotesItems key={e._id} title={e.title} desciption={e.desciption} />
                 })}
             </div>
         </>

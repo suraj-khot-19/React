@@ -10,9 +10,9 @@ function NotesItems(props) {
                             {/* title */}
                             <div className="me-auto p-2"> <h5 className="card-title">{props.title}</h5></div>
                             {/* edit */}
-                            <div className="p-2"> <i className="fa-solid fa-pen-to-square"></i></div>
+                            {/* <div className="p-2"> <i className="fa-solid fa-pen-to-square"></i></div> */}
                             {/* delete */}
-                            <div className="p-2"> <i className="fa-solid fa-trash-can"></i></div>
+                            {/* <div className="p-2"> <i className="fa-solid fa-trash-can"></i></div> */}
                         </div>
                         {/* desciption */}
                         <p className="card-text">{props.desciption}</p>

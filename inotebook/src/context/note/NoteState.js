@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const NoteState = (props) => {
     // initial state
-    const note = [
+    const notes = [
         {
             "_id": "66e0007ebc78e9bc1a3eadd6",
             "user": "66daac6882f18f4fb2debd83",
@@ -60,10 +60,23 @@ const NoteState = (props) => {
         },
     ]
     // use state snippet
-    const [state, setstate] = useState(note);
+    const [note, setNote] = useState(notes);
 
+    // fun to add a note
+    const addNote = (title, desciption, tag) => {
+        const newNote = {
+            "_id": "66e00080bc78e9bc1a3eade6",
+            "user": "66daac6882f18f4fb2debd83",
+            "title": title,
+            "desciption": desciption,
+            "tag": tag,
+            "time": "2024-09-10T08:17:04.241Z",
+            "__v": 0
+        }
+        setNote(note.concat(newNote));
+    }
     return (
-        <NoteContext.Provider value={{ state, setstate }}>
+        <NoteContext.Provider value={{ note, addNote }}>
             {props.children}
         </NoteContext.Provider>
     );
