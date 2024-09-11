@@ -62,7 +62,7 @@ const NoteState = (props) => {
     // use state snippet
     const [note, setNote] = useState(notes);
 
-    // fun to add a note
+    // fun to add a new note
     const addNote = (title, desciption, tag) => {
         const newNote = {
             "_id": "66e00080bc78e9bc1a3eade6",
@@ -75,8 +75,19 @@ const NoteState = (props) => {
         }
         setNote(note.concat(newNote));
     }
+
+    // fun to delete a note
+    const deleteNote = (id) => {
+        // removing note with id
+        const newNote = note.filter((e) => {
+            return e._id !== id
+        });
+        // update note
+        setNote(newNote);
+    }
+
     return (
-        <NoteContext.Provider value={{ note, addNote }}>
+        <NoteContext.Provider value={{ note, addNote, deleteNote }}>
             {props.children}
         </NoteContext.Provider>
     );

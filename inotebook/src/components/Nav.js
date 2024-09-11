@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 export default function Nav() {
     // Returns the current location object, which represents the current URL in web browsers.
     let location = useLocation();
-    useEffect(() => {
-        //this will auto. track the change in route
-    }, [location])
-
     return (
         <>
             <nav className='navbar navbar-expand-lg bg-body-tertiary bg-dark' data-bs-theme='dark'>

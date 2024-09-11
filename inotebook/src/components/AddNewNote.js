@@ -31,15 +31,23 @@ function AddNewNote() {
                     <div className='container'>
                         {/* form */}
                         <form>
+                            {/* title */}
                             <div className="mb-3">
                                 <label htmlFor="title" className="form-label">Note title</label>
-                                <input type="text" className="form-control" id="title" name='title' aria-describedby="titleHelp" onChange={handleOnChange} />
+                                <input type="text" className="form-control" id="title" name='title' aria-describedby="titleHelp" onChange={handleOnChange} minLength={3} required />
                             </div>
+                            {/* description */}
                             <div className="mb-3">
                                 <label htmlFor="desciption" className="form-label">description</label>
-                                <input type="text" className="form-control" id="desciption" name='desciption' onChange={handleOnChange} />
+                                <input type="text" className="form-control" id="desciption" name='desciption' onChange={handleOnChange} minLength={5} required />
                             </div>
-                            <button type="submit" onClick={addNewNote} className="btn btn-primary my-3 mx-4">Add</button>
+                            {/* tag */}
+                            <div className="mb-3">
+                                <label htmlFor="tag" className="form-label">tag</label>
+                                <input type="text" className="form-control" id="tag" name='tag' onChange={handleOnChange} />
+                            </div>
+                            {/* btn */}
+                            <button disabled={note.title.length === 0 || note.desciption.length === 0} type="submit" onClick={addNewNote} className="btn btn-primary my-3 mx-4">Add</button>
                         </form>
                     </div>
                 </div>
