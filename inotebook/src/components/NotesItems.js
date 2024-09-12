@@ -3,7 +3,7 @@ import NoteContext from '../context/note/NoteContext'
 
 function NotesItems(props) {
     // props destructure
-    const { title, desciption, _id, tag, time } = props.note;
+    const { note, updateNoteClient } = props;
 
     // note context
     const context = useContext(NoteContext);
@@ -11,29 +11,30 @@ function NotesItems(props) {
     // destucture
     const { deleteNote } = context;
 
-    // format time
-    const gmtDate = new Date(time).toDateString();
-
+    // capitalize fun
+    const capitalize = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     return (
         <>
             <div className="col-md-3 my-3">
-                <div className="card">
+                <div style={{ backgroundColor: ' rgba(23, 23, 23, 0.2)' }} className="card">
                     <div className="card-body">
                         <div className="d-flex mb-3">
                             {/* title */}
-                            <div className="me-auto p-2"> <h5 className="card-title" >{title}</h5></div>
+                            <div className="me-auto p-2"> <h3 className="card-title" >{capitalize(note.title)}</h3></div>
                             {/* edit */}
-                            <div className="p-2"> <i className="fa-solid fa-pen-to-square pe-auto" role='button'></i></div>
+                            <div className="p-2"> <i className="fa-solid fa-pen-to-square pe-auto" role='button' onClick={() => updateNoteClient(note)}>Edit</i></div>
                             {/* delete */}
-                            <div className="p-2 "> <i className="fa-solid fa-trash-can" role='button' onClick={() => deleteNote(_id)}></i></div>
+                            <div className="p-2 "> <i className="fa-solid fa-trash-can" role='button' onClick={() => deleteNote(note._id)}>Delete</i></div>
                         </div>
                         {/* desciption */}
-                        <p className="card-text">{desciption}</p>
+                        <p className="card-text">{note.desciption}</p>
                         <div className="d-flex">
                             {/* tag */}
-                            <p className="card-text mx-1">{tag === 'default' ? '' : tag}</p>
+                            <p style={{ fontWeight: '500', fontStyle: 'italic' }} className="card-text mx-1 text-primary">{note.tag === 'default' ? '' : note.tag}</p>
                             {/* time */}
-                            <p className="card-text mx-1">-{gmtDate}</p>
+                            <p style={{ fontWeight: '500', fontStyle: 'italic' }} className="card-text mx-1"> - {new Date(note.time).toDateString()}</p>
                         </div>
                     </div>
                 </div>
