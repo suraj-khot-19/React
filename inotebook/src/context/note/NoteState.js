@@ -42,17 +42,11 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({ title, desciption, tag }),
         });
-
+        // we will receive note from response
+        const newNote = await response.json();
+        
         // client side 
-        const newNote = {
-            "user": "66daac6882f18f4fb2debd83",
-            "title": title,
-            "desciption": desciption,
-            "tag": tag,
-        }
         setNote(note.concat(newNote));
-        console.log('user', note.user);
-        fetchNote();
     }
 
     //! fun to delete a note

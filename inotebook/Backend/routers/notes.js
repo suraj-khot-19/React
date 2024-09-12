@@ -48,7 +48,7 @@ router.post(
                 user: uid,
             });
             const saved = await note.save();
-            res.send({ note: saved })
+            res.send(saved)
         } catch (error) {
             return res.status(500).send({ error: error.message });
         }

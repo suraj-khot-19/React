@@ -22,6 +22,8 @@ export default function Nav() {
                             </li>
                         </ul>
                     </div>
+                    <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
+                    <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
                 </div>
             </nav>
         </>
