@@ -7,6 +7,9 @@ const jwt = require('jsonwebtoken');
 const getUserData = require('../middleware/getuser');
 const JWT_SecureStr = "ILovePrograming";
 
+//? sucess
+let sucess = false;
+
 //! register user
 router.post(
     // url
@@ -47,7 +50,8 @@ router.post(
                 id: user.id
             }
             var authToken = jwt.sign(uid, JWT_SecureStr);
-            res.send({ authToken });
+            sucess = true;
+            res.send({ sucess, authToken });
 
         } catch (error) {
             res.status(500).send("Some error is occured!");
@@ -92,7 +96,8 @@ router.post(
                 id: user.id,
             }
             var authToken = jwt.sign(uid, JWT_SecureStr);
-            res.json({ authToken });
+            sucess = true;
+            res.json({ sucess, authToken });
         } catch (error) {
             res.status(500).send("Some error is occured!");
         }
