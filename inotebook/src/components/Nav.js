@@ -1,7 +1,16 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Nav() {
+    // navigator
+    let navigate = useNavigate();
+
+    // logout
+    const logout = () => {
+        localStorage.removeItem('auth-token');
+        navigate('/login');
+    }
+
     // Returns the current location object, which represents the current URL in web browsers.
     let location = useLocation();
     return (
@@ -22,8 +31,19 @@ export default function Nav() {
                             </li>
                         </ul>
                     </div>
-                    <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
-                    <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
+                    {
+                        localStorage.getItem('auth-token') !== 0 ?
+                            // if no token 
+                            <div>
+                                <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
+                                <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
+                            </div>
+                            // if have token
+                            :
+                            <div>
+                                <button className="btn btn-primary mx-1" onClick={logout}>LogOut</button>
+                            </div>
+                    }
                 </div>
             </nav>
         </>

@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
   // state for alert
-  const [alert, setalert] = useState({ msg: 'Welcome To Colud Note App', type: 'warning' });
+  const [alert, setalert] = useState({ msg: 'Welcome To I-NoteBook App', type: 'warning' });
 
   // to remove alert on top
   const removeAlert = () => {

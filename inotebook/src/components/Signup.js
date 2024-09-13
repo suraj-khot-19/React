@@ -24,7 +24,6 @@ function Signup(props) {
             props.setalert({ msg: 'Password does not match!', type: 'danger' });
         }
         else {
-
             // api call
             const response = await fetch('http://localhost:5000/auth/user', {
                 method: 'POST',
@@ -42,19 +41,22 @@ function Signup(props) {
             // navigate if sucess code is 200
             if (data.sucess) {
                 navigate('/login');
+                // show alert
+                props.setalert({ msg: 'Sign up sucessfully!', type: 'success' })
             }
-
-            // show alert
-            data.sucess ? props.setalert({ msg: 'Sign up sucessfully!', type: 'success' }) : props.setalert({ msg: 'Some error occured!', type: 'danger' });
+            else {
+                props.setalert({ msg: data.errors[0].msg, type: 'danger' });
+            }
         }
     }
     return (
         <>
             <div className="container my-2">
+                <h3 className='text-center'>Create an Account To Continue With I-NoteBook</h3>
                 {/* form */}
                 <form onSubmit={signup}>
                     {/* name */}
-                    <div className="mb-3">
+                    <div className="mb-3 mt-4">
                         <label htmlFor="name" className="form-label">Name</label>
                         <input type="text" className="form-control" id="name" name='name' value={user.name} aria-describedby="emailHelp" onChange={handleOnChange} minLength={2} required />
                     </div>
@@ -74,7 +76,7 @@ function Signup(props) {
                         <input type="text" className="form-control" id="cpassword" name='cpassword' value={user.cpassword} aria-describedby="titleHelp" onChange={handleOnChange} minLength={5} required />
                     </div>
                     {/* btn */}
-                    <button type="submit" className="btn btn-primary my-3 mx-4">Sign Up</button>
+                    <button type="submit" className="btn btn-primary my-3 mx-4">Create an Account</button>
                 </form>
             </div>
         </>

@@ -30,22 +30,27 @@ function Login(props) {
         });
         const data = await response.json();
 
-        // now storing auth token to data storage
-        localStorage.setItem('auth-token', data.authToken);
-
-        // and if status code is 200 then redirect to home using 
-        data.sucess && navigate('/');
-
-        // show alert
-        data.sucess ? props.setalert({ msg: 'Logged in sucessfully!', type: 'success' }) : props.setalert({ msg: 'Invalid credintials!', type: 'danger' })
+        // and if status code is 200 then redirect to home and store auth token
+        if (data.sucess) {
+            // now storing auth token to data storage
+            localStorage.setItem('auth-token', data.authToken);
+            navigate('/');
+            // show alert
+            props.setalert({ msg: 'Logged in sucessfully!', type: 'success' })
+        }
+        else {
+            // show alert
+            props.setalert({ msg: 'Invalid credintials!', type: 'danger' })
+        }
     }
     return (
         <>
             <div className="container my-2">
+                <h3 className='text-center'>Login To Continue With I-NoteBook</h3>
                 {/* form */}
                 <form onSubmit={login}>
                     {/* email */}
-                    <div className="mb-3">
+                    <div className="mb-3 mt-4">
                         <label htmlFor="email" className="form-label">Email</label>
                         <input type="email" className="form-control" id="email" name='email' value={user.email} aria-describedby="emailHelp" onChange={handleOnChange} />
                     </div>

@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteContext from '../context/note/NoteContext';
 import NotesItems from './NotesItems';
+import { useNavigate } from 'react-router-dom';
 function Notes(props) {
     //! create state for note to be edited
     const [newNote, setnewNote] = useState({ id: '', etitle: '', edesciption: '', etag: '' });
@@ -13,11 +14,17 @@ function Notes(props) {
     const { note, fetchNote, updateNote } = context;
 
     //!   first time when load fetch notes
+    //? navigater to navigate when no auth token
+    let navigate = useNavigate();
     useEffect(() => {
-        // calling fetch note from noteState and render only once
-        fetchNote();
-        // eslint-disable-next-line
-    }, []);
+        if (localStorage.getItem('auth-token') !== null) {
+            // calling fetch note from noteState and render only once
+            fetchNote();
+        }
+        else {
+            navigate('/login');
+        }
+    });
 
     //!   fun to handel a click on edit btn
     // use ref .... handel click on edit
@@ -93,7 +100,8 @@ function Notes(props) {
             <div className="row">
                 {note.map((e) => {
                     return <NotesItems key={e._id} note={e} updateNoteClient={updateNoteClient} setalert={props.setalert} />
-                })}
+                })
+                }
             </div>
         </>
     )
