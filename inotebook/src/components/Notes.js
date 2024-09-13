@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteContext from '../context/note/NoteContext';
 import NotesItems from './NotesItems';
-function Notes() {
+function Notes(props) {
     //! create state for note to be edited
     const [newNote, setnewNote] = useState({ id: '', etitle: '', edesciption: '', etag: '' });
 
@@ -36,6 +36,15 @@ function Notes() {
     const handleOnChange = (e) => {
         // update note which is types
         setnewNote({ ...newNote, [e.target.name]: e.target.value })
+    }
+
+    // ! handel edit btn
+    const handelEditButton = () => {
+        updateNote(newNote.id, newNote.etitle, newNote.edesciption, newNote.etag);
+        // set alert
+        props.setalert({ msg: 'Note updated sucessfully', type: 'success' });
+        // close window
+        closeUpdate.current.click();
     }
     return (
         <>
@@ -74,12 +83,7 @@ function Notes() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={closeUpdate}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={() => {
-                                updateNote(newNote.id, newNote.etitle, newNote.edesciption, newNote.etag);
-                                // close window
-                                closeUpdate.current.click();
-
-                            }} >Update</button>
+                            <button type="button" className="btn btn-primary" onClick={handelEditButton} >Update</button>
                         </div>
                     </div>
                 </div>
@@ -88,7 +92,7 @@ function Notes() {
             {/* display notes using map */}
             <div className="row">
                 {note.map((e) => {
-                    return <NotesItems key={e._id} note={e} updateNoteClient={updateNoteClient} />
+                    return <NotesItems key={e._id} note={e} updateNoteClient={updateNoteClient} setalert={props.setalert} />
                 })}
             </div>
         </>

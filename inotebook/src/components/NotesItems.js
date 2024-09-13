@@ -24,9 +24,12 @@ function NotesItems(props) {
                             {/* title */}
                             <div className="me-auto p-2"> <h3 className="card-title" >{capitalize(note.title)}</h3></div>
                             {/* edit */}
-                            <div className="p-2"> <i className="fa-solid fa-pen-to-square pe-auto" role='button' onClick={() => updateNoteClient(note)}></i></div>
+                            <div className="p-2"> <i className="fa-solid fa-pen-to-square pe-auto" role='button' onClick={() => updateNoteClient(note)}>edit</i></div>
                             {/* delete */}
-                            <div className="p-2 "> <i className="fa-solid fa-trash-can" role='button' onClick={() => deleteNote(note._id)}></i></div>
+                            <div className="p-2 "><i className="fa-solid fa-trash-can" role='button' onClick={() => {
+                                deleteNote(note._id);
+                                props.setalert({ msg: 'Note deleted successfully', type: 'success' })
+                            }}>delete</i></div>
                         </div>
                         {/* desciption */}
                         <p className="card-text">{note.desciption}</p>

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import NoteContext from '../context/note/NoteContext';
-function AddNewNote() {
+
+function AddNewNote(props) {
     // getting context
     const context = useContext(NoteContext);
 
@@ -16,6 +17,9 @@ function AddNewNote() {
         e.preventDefault();
         // send feilds to fun
         addNote(note.title, note.desciption, note.tag);
+        // show alert
+        props.setalert({ msg: 'Note added sucessfully!', type: 'success' });
+        // make feild blank
         setnote({ title: '', desciption: '', tag: '' });
     }
 

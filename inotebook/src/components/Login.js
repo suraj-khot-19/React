@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login(props) {
     // navigate
     let navigate = useNavigate();
 
@@ -35,16 +35,19 @@ function Login() {
 
         // and if status code is 200 then redirect to home using 
         data.sucess && navigate('/');
+
+        // show alert
+        data.sucess ? props.setalert({ msg: 'Logged in sucessfully!', type: 'success' }) : props.setalert({ msg: 'Invalid credintials!', type: 'danger' })
     }
     return (
         <>
-            <div className="container">
+            <div className="container my-2">
                 {/* form */}
                 <form onSubmit={login}>
                     {/* email */}
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
-                        <input type="text" className="form-control" id="email" name='email' value={user.email} aria-describedby="emailHelp" onChange={handleOnChange} />
+                        <input type="email" className="form-control" id="email" name='email' value={user.email} aria-describedby="emailHelp" onChange={handleOnChange} />
                     </div>
                     {/* password */}
                     <div className="mb-3">
