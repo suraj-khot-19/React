@@ -32,7 +32,7 @@ export default function Nav() {
                         </ul>
                     </div>
                     {
-                        localStorage.getItem('auth-token') !== 0 ?
+                        localStorage.getItem('auth-token') === null ?
                             // if no token 
                             <div>
                                 <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
@@ -41,6 +41,7 @@ export default function Nav() {
                             // if have token
                             :
                             <div>
+                                <Link className="btn btn-info mx-2" to="/user"><i className="fa-solid fa-user fs-3"></i></Link>
                                 <button className="btn btn-primary mx-1" onClick={logout}>LogOut</button>
                             </div>
                     }

@@ -1,5 +1,3 @@
-// eslint-disable-next-line
-import Alert from '../../components/Alert';
 import NoteContext from './NoteContext'
 import { useState } from 'react';
 const iNotebook = 'http://localhost:5000';

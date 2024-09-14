@@ -7,35 +7,38 @@ import Signup from './components/Signup';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import NoteState from './context/note/NoteState';
 import Alert from './components/Alert';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import UserDetails from './components/UserDetails';
 
 function App() {
-  // state for alert
-  const [alert, setalert] = useState({ msg: 'Welcome To I-NoteBook App', type: 'warning' });
+  //alert initialy null
+  const [alert, setNewAlert] = useState(null);
 
-  // to remove alert on top
-  const removeAlert = () => {
+  //function to show alert
+  const setalert = (message, type) => {
+    setNewAlert({
+      msg: message,
+      type: type,
+    });
+
+    //setting alert null in 1.5 sec
     setTimeout(() => {
-      setalert({ msg: '', type: '' });
-    }, 3500);
+      setalert(null);
+    }, 2500);
   }
-
-  // mouniting state
-  useEffect(() => {
-    removeAlert();
-  }, [alert]);
 
   return (
     <>
       <NoteState>
         <Router>
           <Nav />
-          <Alert msg={alert.msg} type={alert.type} />
+          <Alert alert={alert} />
           <Routes>
             <Route path="/" element={<Home setalert={setalert} />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login setalert={setalert} />} />
             <Route path="/signup" element={<Signup setalert={setalert} />} />
+            <Route path="/user" element={<UserDetails />} />
           </Routes>
         </Router>
       </NoteState>

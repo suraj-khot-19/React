@@ -97,7 +97,7 @@ router.post(
             }
             var authToken = jwt.sign(uid, JWT_SecureStr);
             sucess = true;
-            res.json({ sucess, authToken });
+            res.json({ sucess, authToken, user });
         } catch (error) {
             res.status(500).send("Some error is occured!");
         }

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteContext from '../context/note/NoteContext';
 import NotesItems from './NotesItems';
 import { useNavigate } from 'react-router-dom';
+
 function Notes(props) {
     //! create state for note to be edited
     const [newNote, setnewNote] = useState({ id: '', etitle: '', edesciption: '', etag: '' });
@@ -16,6 +17,7 @@ function Notes(props) {
     //!   first time when load fetch notes
     //? navigater to navigate when no auth token
     let navigate = useNavigate();
+
     useEffect(() => {
         if (localStorage.getItem('auth-token') !== null) {
             // calling fetch note from noteState and render only once
@@ -24,7 +26,7 @@ function Notes(props) {
         else {
             navigate('/login');
         }
-    });
+    }, []);
 
     //!   fun to handel a click on edit btn
     // use ref .... handel click on edit
@@ -49,7 +51,8 @@ function Notes(props) {
     const handelEditButton = () => {
         updateNote(newNote.id, newNote.etitle, newNote.edesciption, newNote.etag);
         // set alert
-        props.setalert({ msg: 'Note updated sucessfully', type: 'success' });
+        props.setalert('Note updated sucessfully', 'success');
+
         // close window
         closeUpdate.current.click();
     }
@@ -96,6 +99,11 @@ function Notes(props) {
                 </div>
             </div>
 
+            {/* if no note */}
+            {note.length === 0 &&
+                <div>
+                    <h5 style={{ fontStyle: 'italic' }} className='mx-2 text-primary'>No note found!</h5>
+                </div>}
             {/* display notes using map */}
             <div className="row">
                 {note.map((e) => {

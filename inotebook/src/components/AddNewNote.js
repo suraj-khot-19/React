@@ -18,7 +18,7 @@ function AddNewNote(props) {
         // send feilds to fun
         addNote(note.title, note.desciption, note.tag);
         // show alert
-        props.setalert({ msg: 'Note added sucessfully!', type: 'success' });
+        props.setalert('Note added sucessfully!', 'success');
         // make feild blank
         setnote({ title: '', desciption: '', tag: '' });
     }
@@ -35,7 +35,7 @@ function AddNewNote(props) {
                     <h2>Create a Note</h2>
                     <div className='container'>
                         {/* form */}
-                        <form>
+                        <form onSubmit={addNewNote}>
                             {/* title */}
                             <div className="mb-3">
                                 <label htmlFor="title" className="form-label">Note title</label>
@@ -52,7 +52,7 @@ function AddNewNote(props) {
                                 <input type="text" className="form-control" id="tag" name='tag' value={note.tag} onChange={handleOnChange} />
                             </div>
                             {/* btn */}
-                            <button disabled={note.title.length === 0 || note.desciption.length === 0} type="submit" onClick={addNewNote} className="btn btn-primary my-3 mx-4">Add</button>
+                            <button disabled={note.title.length === 0 || note.desciption.length === 0} type="submit" className="btn btn-primary my-3">Add</button>
                         </form>
                     </div>
                 </div>
