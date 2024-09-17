@@ -5,6 +5,7 @@ const { validationResult, body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const getUserData = require('../middleware/getuser');
+const adminMiddleware = require('../middleware/adminModdleware');
 const JWT_SecureStr = "ILovePrograming";
 
 //? sucess
@@ -115,6 +116,13 @@ router.post('/getuser', getUserData, async (req, res) => {
     } catch (error) {
         res.status(500).send("Some error is occured!");
     }
+});
+
+// ! fetch all users in db
+router.get('/allusers', adminMiddleware, async (req, res) => {
+    const user = await User.find();
+    // const all = user.map((e) => (e.name));
+    res.send({ user });
 });
 
 module.exports = router;
